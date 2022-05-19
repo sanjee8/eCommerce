@@ -122,7 +122,6 @@
                                 <h4 class="card-title pricing-card-title text-danger">
                                     299,99 €
                                 </h4>
-
                             </div>
                             <div class="col-5 pt-0">
                                 <button type="button" class="w-100 btn btn-sm btn-outline-primary">Acheter</button>
