@@ -1,11 +1,14 @@
 <?php
 
+use App\Core\Model\Model;
 use App\Router;
 
 define('ROOT', dirname(__DIR__));
 
 require 'vendor/autoload.php';
 
+
+Model::getModel("Session\\Session")->init();
 
 
 /**
@@ -17,3 +20,5 @@ try {
 } catch (Exception $e) {
 
 }
+
+var_dump($_COOKIE);

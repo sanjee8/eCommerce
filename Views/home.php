@@ -27,11 +27,11 @@
                 </div>
                 <div class="card-body">
                     <div class="form-check form-switch py-2">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Afficher les catégories</label>
+                        <input class="form-check-input" type="checkbox" checked role="switch" id="categories_toggle">
+                        <label class="form-check-label" for="categories_toggle">Afficher les catégories</label>
                     </div>
 
-                    <div>
+                    <div id="filter-categories">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" name="category" id="cat-pull" value="pull">
                             <label class="form-check-label" for="cat-pull">Pull</label>
@@ -44,11 +44,11 @@
 
 
                     <div class="form-check form-switch py-2 pt-4">
-                        <input class="form-check-input" type="checkbox" role="switch" id="showPrices">
+                        <input class="form-check-input" type="checkbox" checked role="switch" id="showPrices">
                         <label class="form-check-label" for="showPrices">Afficher les tranches</label>
                     </div>
 
-                    <div>
+                    <div id="filter-prices">
 
                         <label for="minPrice" class="form-label">Prix minimum</label>
                         <input type="range" class="form-range" id="minPrice">

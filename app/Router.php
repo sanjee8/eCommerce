@@ -3,6 +3,7 @@
 namespace App;
 
 use AltoRouter;
+use App\Controllers\Errors\ErrorsController;
 use App\Controllers\Page\PageController;
 
 /**
