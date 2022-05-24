@@ -3,6 +3,7 @@
 namespace App;
 
 use AltoRouter;
+use App\Controllers\Account\LogController;
 use App\Controllers\Errors\ErrorsController;
 use App\Controllers\Page\PageController;
 
@@ -58,29 +59,11 @@ class Router {
             "post" => true
         ),
         4 => array(
-            "name" => "account",
-            "target" => "account",
-            "route" => "account",
-            "post" => true
-        ),
-        5 => array(
             "name" => "logout",
             "target" => "logout",
             "route" => "logout",
             "post" => true
         ),
-        6 => array(
-            "name" => "profiles",
-            "target" => "profiles",
-            "route" => "profiles",
-            "post" => true
-        ),
-        7 => array(
-            "name" => "profile",
-            "target" => "profiles",
-            "route" => "profiles/[i:id]",
-            "post" => true
-        )
     );
 
     /**
@@ -136,7 +119,24 @@ class Router {
                     $controller = new PageController();
                     $controller->home();
                     break;
-
+                case "signup":
+                    $this->actual = "S'inscrire";
+                    $this->category = 5;
+                    $controller = new LogController();
+                    $controller->register();
+                    break;
+                case "signin":
+                    $this->actual = "Se connecter";
+                    $this->category = 5;
+                    $controller = new LogController();
+                    $controller->login();
+                    break;
+                case "logout":
+                    $this->actual = "Me déconnecter";
+                    $this->category = 99;
+                    $controller = new LogController();
+                    $controller->logout();
+                    break;
             }
 
 

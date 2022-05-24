@@ -20,7 +20,7 @@ class LogController extends AccountController {
         if(!Model::getModel("Session\Session")->isLogged()) {
             $this->response("App\Controllers\Account\Login", "Log.signin");
         } else {
-            $link = Router::getRouter()->getLink("account");
+            $link = Router::getRouter()->getLink("home");
             header("Location: ". $link ."");
         }
 

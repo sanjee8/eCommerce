@@ -12,7 +12,7 @@ use App\Core\Model\Model;
  */
 class User extends Model {
 
-    public function create($id, $password, $email, $prenom, $nom) {
+    public function create($email, $password, $prenom, $nom) {
 
         $date = time();
         $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -35,7 +35,7 @@ class User extends Model {
         return $this->db->prepare("
             SELECT *
             FROM users
-            WHERE identifiant = ?
+            WHERE email = ?
         ", [$id])->fetch();
 
 
@@ -48,7 +48,7 @@ class User extends Model {
      */
     public function exists($id) {
 
-        if($this->count_by_id($id) > 0) {
+        if($this->count_by_email($id) > 0) {
             return true;
         } else {
             return false;
