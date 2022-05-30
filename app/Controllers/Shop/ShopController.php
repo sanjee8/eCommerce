@@ -18,11 +18,11 @@ class ShopController extends Controller {
 
     public function home() {
 
-        $tri = Tri::getTri();
+        $links = Tri::getLinks();
 
         $categories = Model::getModel("Shop\Category")->getAll();
         $products = Model::getModel("Shop\Product")->getAll();
-        $this->render("home",compact("products", "categories", "tri"));
+        $this->render("home",compact("products", "categories", "links"));
     }
 
 
@@ -32,7 +32,7 @@ class ShopController extends Controller {
         $param = Router::getRouter()->getParam();
 
 
-        $tri = Tri::getTri();
+        $links = Tri::getLinks();
 
 
         if(isset($param['catId'])) {
@@ -50,14 +50,73 @@ class ShopController extends Controller {
                 $products = Model::getModel("Shop\Product")->getByCategory($param["catId"], $order);
             }
 
+            if(count($products) == 0) {
+                header('Location: ' . Router::getRouter()->getLink("home"));
+            }
 
-            $this->render("home",compact("products", "categories", "tri"));
+            $this->render("home",compact("products", "categories", "links"));
 
         } else {
             $this->home();
         }
 
-        var_dump($param);
+
+
+    }
+
+    public function getByPrice() {
+
+        $param = Router::getRouter()->getParam();
+
+        $links = Tri::getLinks();
+
+
+
+
+        $order = false;
+        if(isset($param["order"])) {
+            if(strcasecmp($param['order'], "desc") == 0) {
+                $order = true;
+            }
+        }
+
+
+
+        $categories = Model::getModel("Shop\Category")->getAll($order);
+        if(isset($param['minPrice']) && isset($param['maxPrice'])) {
+
+            $minPrice = trim($param['minPrice']);
+            $maxPrice = trim($param['maxPrice']);
+
+            if($maxPrice == 'all' AND $minPrice == 'all') {
+                header('Location: ' . Router::getRouter()->getLink("home"));
+            } else if($maxPrice == 'all') {
+                $minPrice = intval($minPrice);
+                $products = Model::getModel("Shop\Product")->getAllMin($minPrice, $order);
+
+            } else if($minPrice == 'all') {
+                $maxPrice = intval($maxPrice);
+                $products = Model::getModel("Shop\Product")->getAllMax($maxPrice, $order);
+
+
+            } else {
+                $minPrice = intval($minPrice);
+                $maxPrice = intval($maxPrice);
+                $products = Model::getModel("Shop\Product")->getAllBet($minPrice,$maxPrice, $order);
+
+            }
+
+            if(count($products) == 0) {
+                header('Location: ' . Router::getRouter()->getLink("home"));
+            }
+            $this->render("home",compact("products", "categories", "links"));
+
+        }
+
+
+
+
+
 
     }
 

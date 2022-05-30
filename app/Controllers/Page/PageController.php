@@ -23,11 +23,11 @@ class PageController extends Controller {
 
     public function home() {
 
-        $tri = Tri::getTri();
 
+        $links = Tri::getLinks();
         $categories = Model::getModel("Shop\Category")->getAll();
         $products = Model::getModel("Shop\Product")->getAll();
-        $this->render("home",compact("products", "categories", "tri"));
+        $this->render("home",compact("products", "categories", "links"));
     }
 
 }

@@ -68,19 +68,25 @@ class Router {
         5 => array(
             "name" => "productsCat",
             "target" => "productsCat",
-            "route" => "[*:catName]-[i:catId]",
+            "route" => "[a:catName]-[i:catId]",
             "post" => true
         ),
         6 => array(
             "name" => "productsCatOrder",
             "target" => "productsCat",
-            "route" => "[*:catName]-[i:catId]/[a:order]",
+            "route" => "[a:catName]-[i:catId]/[a:order]",
             "post" => true
         ),
         7 => array(
             "name" => "productsPrice",
-            "target" => "productsCat",
-            "route" => "[*:catName]-[i:catId]/[a:order]/[i:priceMin]-[i:priceMax]",
+            "target" => "productsPrice",
+            "route" => "[a:minPrice]~[a:maxPrice]",
+            "post" => true
+        ),
+        8 => array(
+            "name" => "productsPriceOrder",
+            "target" => "productsPrice",
+            "route" => "[a:minPrice]~[a:maxPrice]/[a:order]",
             "post" => true
         ),
     );
@@ -158,17 +164,18 @@ class Router {
                     $controller = new LogController();
                     $controller->logout();
                     break;
-                case "products":
-                    $this->actual = "Produits";
-                    $this->category = 2;
-                    $controller = new ShopController();
-                    $controller->home();
-                    break;
                 case "productsCat":
                     $this->actual = "Produits";
                     $this->category = 2;
                     $controller = new ShopController();
                     $controller->getByCategory();
+                    break;
+                case "productsPrice":
+
+                    $this->actual = "Produits";
+                    $this->category = 3;
+                    $controller = new ShopController();
+                    $controller->getByPrice();
                     break;
             }
 

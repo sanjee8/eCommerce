@@ -44,6 +44,52 @@ class Product extends Model {
 
     }
 
+    public function getAllMin($min, $order = false) {
+        $text = "ORDER BY articles.name ASC;";
+        if($order) {
+            $text = "ORDER BY articles.name DESC;";
+        }
+
+        return $this->db->prepare("
+            SELECT *, articles.id as id, articles.name as name, category.name AS category
+            FROM articles
+            LEFT JOIN category ON category.id = articles.category
+            WHERE articles.price > ?
+        " . $text, [$min])->fetchAll(PDO::FETCH_OBJ);
+
+    }
+
+    public function getAllMax($max, $order = false) {
+        $text = "ORDER BY articles.name ASC;";
+        if($order) {
+            $text = "ORDER BY articles.name DESC;";
+        }
+
+        return $this->db->prepare("
+            SELECT *, articles.id as id, articles.name as name, category.name AS category
+            FROM articles
+            LEFT JOIN category ON category.id = articles.category
+            WHERE articles.price < ?
+        " . $text, [$max])->fetchAll(PDO::FETCH_OBJ);
+
+    }
+
+    public function getAllBet($min, $max, $order = false) {
+        $text = "ORDER BY articles.name ASC;";
+        if($order) {
+            $text = "ORDER BY articles.name DESC;";
+        }
+
+        return $this->db->prepare("
+            SELECT *, articles.id as id, articles.name as name, category.name AS category
+            FROM articles
+            LEFT JOIN category ON category.id = articles.category
+            WHERE articles.price > ?
+            AND articles.price < ?
+        " . $text, [$min,$max])->fetchAll(PDO::FETCH_OBJ);
+
+    }
+
     public function getMinPrice() {
 
         return $this->db->prepare("

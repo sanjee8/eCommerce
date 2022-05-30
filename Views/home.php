@@ -10,8 +10,8 @@
                 Tirer l'affichage dans l'ordre <i class="fa fa-solid fa-chevron-down"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="<?= $router->getLink("productsCatOrder", $tri["asc"]); ?>">Trier dans l'ordre croissant</a></li>
-                <li><a class="dropdown-item" href="<?= $router->getLink("productsCatOrder", $tri["desc"]); ?>">Trier dans l'ordre décroissant</a></li>
+                <li><a class="dropdown-item" href="<?= $links[0]; ?>">Trier dans l'ordre croissant</a></li>
+                <li><a class="dropdown-item" href="<?= $links[1]; ?>">Trier dans l'ordre décroissant</a></li>
             </ul>
         </div>
     </div>
