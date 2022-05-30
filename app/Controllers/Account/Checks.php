@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Models\Account;
+namespace App\Controllers\Account;
 
 use App\Core\Model\Model;
 
@@ -31,6 +31,8 @@ class Checks {
             $error_msg .= "Vous êtes déjà inscrit sur le site. <br/>";
             $errors++;
         }
+
+
 
         return array(
             "value" => $prenom.";".$nom,
@@ -87,6 +89,25 @@ class Checks {
             "errors" => $errors
         );
 
+    }
+
+    public function name_test($name, $type) {
+
+        $errors = 0;
+        $error_msg = "";
+
+        $password = trim($name);
+
+        if($name == "") {
+            $error_msg .= "Vous devez spécifier votre ".$type.". <br />";
+            $errors++;
+        }
+
+        return array(
+            "value" => $password,
+            "error_msg" => $error_msg,
+            "errors" => $errors
+        );
     }
 
     /**
@@ -202,7 +223,7 @@ class Checks {
             $error_msg .= "Vos mot de passes ne correspondent pas. <br/>";
             $errors++;
         } else if($conf_password === "") {
-            $error_msg .= "Vous devez confirmer votre mot de passe <br />";
+            $error_msg .= "Vous devez confirmer votre mot de passe. <br />";
             $errors++;
         }
 

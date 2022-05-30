@@ -29,7 +29,7 @@ class Controller {
             extract($variables);
 
         $router = Router::getRouter();
-        //$session = Model::getModel("Session\Session");
+        $session = Model::getModel("Session\Session");
 
         require ($this->viewPath . str_replace('.', '\\', $view) . '.php');
 

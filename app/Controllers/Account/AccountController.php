@@ -59,6 +59,8 @@ class AccountController extends Controller {
             if($resp[0]) {
                 $success = new Alert($resp[1], "success");
                 $response = $success->render();
+                $link = Router::getRouter()->getLink("home");
+                header("Location: ". $link ."");
             } elseif(!$resp[0]) {
                 $error = new Alert($resp[1]);
                 $response = $error->render();

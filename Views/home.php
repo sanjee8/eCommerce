@@ -68,25 +68,26 @@
 
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
                 <div class="col">
-                    <div class="card mb-4 shadow-sm">
+                    <div id="product_1_content" class="card mb-4 shadow-sm">
                         <div class="card-header py-3 bg-white">
-                            <img width="100%" src="https://www.cdiscount.com/pdt2/0/2/2/1/300x300/samue65tu7022/rw/samsung-65tu7022-tv-led-4k-uhd-65-163-cm-h.jpg" alt="">
+                            <img name="image_product" width="100%" src="https://www.cdiscount.com/pdt2/0/2/2/1/300x300/samue65tu7022/rw/samsung-65tu7022-tv-led-4k-uhd-65-163-cm-h.jpg" alt="">
                         </div>
                         <div class="card-body row">
                             <div class="col-12">
-                                <h4 class="text-uppercase" style="font-size: medium">Nom d'article test bla</h4>
+                                <h4 class="text-uppercase" name="name_product" style="font-size: medium">Nom d'article test bla</h4>
                             </div>
                             <div class="col-7">
-                                <h4 class="card-title pricing-card-title text-danger">
+                                <h4 name="price_product" class="card-title pricing-card-title text-danger">
                                     299,99 €
                                 </h4>
 
                             </div>
                             <div class="col-5 pt-0">
-                                <button type="button" class="w-100 btn btn-sm btn-outline-primary">Acheter</button>
+                                <button type="button" name="buy_product" id="product_1" class="w-100 btn btn-sm btn-outline-primary">Acheter</button>
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="col">
                     <div class="card mb-4 shadow-sm">
