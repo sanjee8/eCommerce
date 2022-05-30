@@ -4,6 +4,7 @@
 namespace App\Controllers\Page;
 
 
+use App\Controllers\Account\Tri;
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
 
@@ -21,8 +22,12 @@ class PageController extends Controller {
     }
 
     public function home() {
-        //$postes = Model::getModel("Profiles\Postes")->getAll();
-        $this->render("home"); //compact("postes")
+
+        $tri = Tri::getTri();
+
+        $categories = Model::getModel("Shop\Category")->getAll();
+        $products = Model::getModel("Shop\Product")->getAll();
+        $this->render("home",compact("products", "categories", "tri"));
     }
 
 }

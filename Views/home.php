@@ -10,8 +10,8 @@
                 Tirer l'affichage dans l'ordre <i class="fa fa-solid fa-chevron-down"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Trier dans l'ordre croissant</a></li>
-                <li><a class="dropdown-item" href="#">Trier dans l'ordre décroissant</a></li>
+                <li><a class="dropdown-item" href="<?= $router->getLink("productsCatOrder", $tri["asc"]); ?>">Trier dans l'ordre croissant</a></li>
+                <li><a class="dropdown-item" href="<?= $router->getLink("productsCatOrder", $tri["desc"]); ?>">Trier dans l'ordre décroissant</a></li>
             </ul>
         </div>
     </div>
@@ -26,20 +26,21 @@
                     <h4 class="my-0 fw-normal">FILTRES</h4>
                 </div>
                 <div class="card-body">
+                    <div class="text-center">
+                        <a href="<?= $router->getLink("home"); ?>" class="btn btn-sm btn-success">Réinitialiser le filtre</a>
+                    </div>
+
                     <div class="form-check form-switch py-2">
                         <input class="form-check-input" type="checkbox" checked role="switch" id="categories_toggle">
                         <label class="form-check-label" for="categories_toggle">Afficher les catégories</label>
                     </div>
 
                     <div id="filter-categories">
+                        <?php foreach ($categories as $category) { ?>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" name="category" id="cat-pull" value="pull">
-                            <label class="form-check-label" for="cat-pull">Pull</label>
+                            <a class="btn btn-light btn-sm inline" href="<?= $router->getLink("productsCat", ["catName" => $category->name,"catId" => $category->id]) ?>">» <?= $category->name ?></a>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" name="category" id="cat-jogging" value="jogging">
-                            <label class="form-check-label" for="cat-jogging">Jogging</label>
-                        </div>
+                        <?php } ?>
                     </div>
 
 
@@ -64,72 +65,33 @@
 
         <div class="col-9">
 
-
-
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <?php foreach ($products as $product ) { ?>
                 <div class="col">
-                    <div id="product_1_content" class="card mb-4 shadow-sm">
+                    <div id="product_<?= $product->id ?>_content" class="card mb-4 shadow-sm">
                         <div class="card-header py-3 bg-white">
-                            <img name="image_product" width="100%" src="https://www.cdiscount.com/pdt2/0/2/2/1/300x300/samue65tu7022/rw/samsung-65tu7022-tv-led-4k-uhd-65-163-cm-h.jpg" alt="">
+                            <img name="image_product" width="100%" src="<?= $product->image ?>" alt="">
                         </div>
                         <div class="card-body row">
                             <div class="col-12">
-                                <h4 class="text-uppercase" name="name_product" style="font-size: medium">Nom d'article test bla</h4>
+                                <h4 class="text-uppercase" name="name_product" style="font-size: medium"><?= $product->name ?></h4>
                             </div>
                             <div class="col-7">
                                 <h4 name="price_product" class="card-title pricing-card-title text-danger">
-                                    299,99 €
+                                    <?= $product->price ?> €
                                 </h4>
 
                             </div>
                             <div class="col-5 pt-0">
-                                <button type="button" name="buy_product" id="product_1" class="w-100 btn btn-sm btn-outline-primary">Acheter</button>
+                                <button type="button" name="buy_product" id="product_<?= $product->id ?>" class="w-100 btn btn-sm btn-outline-primary">Acheter</button>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-header py-3 bg-white">
-                            <img width="100%" src="https://www.cdiscount.com/pdt2/0/2/2/1/300x300/samue65tu7022/rw/samsung-65tu7022-tv-led-4k-uhd-65-163-cm-h.jpg" alt="">
-                        </div>
-                        <div class="card-body row">
-                            <div class="col-12">
-                                <h4 class="text-uppercase" style="font-size: medium">Nom d'article test bla</h4>
-                            </div>
-                            <div class="col-7">
-                                <h4 class="card-title pricing-card-title text-danger">
-                                    299,99 €
-                                </h4>
 
-                            </div>
-                            <div class="col-5 pt-0">
-                                <button type="button" class="w-100 btn btn-sm btn-outline-primary">Acheter</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-header py-3 bg-white">
-                            <img width="100%" src="https://www.cdiscount.com/pdt2/0/2/2/1/300x300/samue65tu7022/rw/samsung-65tu7022-tv-led-4k-uhd-65-163-cm-h.jpg" alt="">
-                        </div>
-                        <div class="card-body row">
-                            <div class="col-12">
-                                <h4 class="text-uppercase" style="font-size: medium">Nom d'article test bla</h4>
-                            </div>
-                            <div class="col-7">
-                                <h4 class="card-title pricing-card-title text-danger">
-                                    299,99 €
-                                </h4>
-                            </div>
-                            <div class="col-5 pt-0">
-                                <button type="button" class="w-100 btn btn-sm btn-outline-primary">Acheter</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
+
             </div>
         </div>
 

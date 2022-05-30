@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\Models\Account;
+namespace App\Controllers\Account;
 
-use App\Controllers\Account\Checks;
+
 use App\Core\Model\Model;
 
 /**

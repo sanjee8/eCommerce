@@ -6,6 +6,7 @@ use AltoRouter;
 use App\Controllers\Account\LogController;
 use App\Controllers\Errors\ErrorsController;
 use App\Controllers\Page\PageController;
+use App\Controllers\Shop\ShopController;
 
 /**
  * Class Router
@@ -64,6 +65,24 @@ class Router {
             "route" => "logout",
             "post" => true
         ),
+        5 => array(
+            "name" => "productsCat",
+            "target" => "productsCat",
+            "route" => "[*:catName]-[i:catId]",
+            "post" => true
+        ),
+        6 => array(
+            "name" => "productsCatOrder",
+            "target" => "productsCat",
+            "route" => "[*:catName]-[i:catId]/[a:order]",
+            "post" => true
+        ),
+        7 => array(
+            "name" => "productsPrice",
+            "target" => "productsCat",
+            "route" => "[*:catName]-[i:catId]/[a:order]/[i:priceMin]-[i:priceMax]",
+            "post" => true
+        ),
     );
 
     /**
@@ -94,7 +113,9 @@ class Router {
         foreach ($this->pages as $page) {
 
             $this->router->map("GET", $page['route'], $page['target'], $page['name']);
-
+            if($page["route"] != "") {
+                $this->router->map("GET", $page['route']."/", $page['target']);
+            }
             if($page['post']) {
                 $this->router->map("POST", $page['route'], $page['target']);
             }
@@ -136,6 +157,18 @@ class Router {
                     $this->category = 99;
                     $controller = new LogController();
                     $controller->logout();
+                    break;
+                case "products":
+                    $this->actual = "Produits";
+                    $this->category = 2;
+                    $controller = new ShopController();
+                    $controller->home();
+                    break;
+                case "productsCat":
+                    $this->actual = "Produits";
+                    $this->category = 2;
+                    $controller = new ShopController();
+                    $controller->getByCategory();
                     break;
             }
 

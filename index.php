@@ -21,4 +21,4 @@ try {
 
 }
 
-var_dump($_COOKIE);
+

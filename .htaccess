@@ -4,3 +4,9 @@ RewriteCond %{REQUEST_URI} !^/Request/?$
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$ index.php [QSA,L]
+RewriteEngine On
+RewriteBase /eCommerce/
+RewriteCond %{REQUEST_URI} !^/Request/?$
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php [QSA,L]
