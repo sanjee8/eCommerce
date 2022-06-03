@@ -4,6 +4,7 @@
 namespace App\Controllers\Page;
 
 
+use App\Controllers\Account\Pagination;
 use App\Controllers\Account\Tri;
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
@@ -26,8 +27,17 @@ class PageController extends Controller {
 
         $links = Tri::getLinks();
         $categories = Model::getModel("Shop\Category")->getAll();
-        $products = Model::getModel("Shop\Product")->getAll();
-        $this->render("home",compact("products", "categories", "links"));
+        $products_brut = Model::getModel("Shop\Product")->getAll();
+
+        $pagination = new Pagination($products_brut);
+
+        $products = $pagination->getPage();
+
+        $buttons = $pagination->getButtons();
+
+
+
+        $this->render("home",compact("products", "categories", "links", "buttons"));
     }
 
 }

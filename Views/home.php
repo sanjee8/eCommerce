@@ -93,6 +93,55 @@
                 <?php } ?>
 
             </div>
+
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+
+                        <?php
+                        if($buttons[0] > 0) {
+                            ?>
+                            <li class="page-item <?php if($buttons[1] == 0) echo "disabled"; ?>">
+                                <a class="page-link" href="<?= $buttons[4] ?>">Précédent</a>
+                            </li>
+                            <?php
+                            $i = 0;
+                            while ($i <= $buttons[0]) {
+                                $pageArray = $buttons[2];
+                                $pageArray['page'] = $i;
+                                if(isset($router->getParam()['minPrice'])) {
+                                    $linkPage = $router->getLink("productsPricePage", $pageArray);
+                                } else {
+                                    $linkPage = $router->getLink("productsCatPage", $pageArray);
+                                }
+                                ?>
+                                <li class="page-item"><a class="page-link" href="<?= $linkPage; ?>"><?=$i+1 ?></a></li>
+                                <?php
+                                $i++;
+                            }
+                            ?>
+                            <li class="page-item <?php if($buttons[1] == $buttons[0]) echo "disabled"; ?>">
+                                <a class="page-link" href="<?= $buttons[3] ?>">Suivant</a>
+                            </li>
+                            <?php
+                        } else {
+                            ?>
+                            <li class="page-item disabled">
+                                <a class="page-link">Précédent</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link">Suivant</a>
+                            </li>
+                            <?php
+                        }
+                        ?>
+
+
+                    </ul>
+                </nav>
+
+
+            </div>
         </div>
 
     </div>

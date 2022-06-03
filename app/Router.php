@@ -89,6 +89,18 @@ class Router {
             "route" => "[a:minPrice]~[a:maxPrice]/[a:order]",
             "post" => true
         ),
+        9 => array(
+            "name" => "productsPricePage",
+            "target" => "productsPrice",
+            "route" => "[a:minPrice]~[a:maxPrice]/[a:order]/[i:page]",
+            "post" => true
+        ),
+        10 => array(
+            "name" => "productsCatPage",
+            "target" => "productsCat",
+            "route" => "[a:catName]-[i:catId]/[a:order]/[i:page]",
+            "post" => true
+        ),
     );
 
     /**
