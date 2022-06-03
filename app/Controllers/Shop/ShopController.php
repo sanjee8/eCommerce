@@ -37,12 +37,12 @@ class ShopController extends Controller {
 
 
         if(isset($param['catId'])) {
-            $order = false;
+            $order = "asc";
             if(isset($param["order"])) {
-                if(strcasecmp($param['order'], "desc") == 0) {
-                    $order = true;
-                }
+                $order = trim($param['order']);
             }
+
+
 
             $categories = Model::getModel("Shop\Category")->getAll($order);
             if($param["catId"] == "0") {
@@ -82,11 +82,9 @@ class ShopController extends Controller {
 
 
 
-        $order = false;
+        $order = "asc";
         if(isset($param["order"])) {
-            if(strcasecmp($param['order'], "desc") == 0) {
-                $order = true;
-            }
+            $order = trim($param['order']);
         }
 
 

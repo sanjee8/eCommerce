@@ -85,6 +85,23 @@ class Pagination {
 
     }
 
+    public function getPageOf($page) {
+
+        $array = $this->getActual();
+
+        $array['page'] = $page;
+
+
+
+        if(isset($this->params['minPrice'])) {
+            return Router::getRouter()->getLink("productsPricePage", $array);
+        } else {
+            return Router::getRouter()->getLink("productsCatPage", $array);
+        }
+
+
+    }
+
     public function getPreviousLink() {
 
         $array = $this->getActual();
@@ -129,11 +146,19 @@ class Pagination {
 
 
     public function getPage() {
+
         $array = [];
         $page = 0;
         if(isset($this->params['page'])) {
             $page = intval($this->params['page']);
         }
+
+
+        if($page != 0 && $page > $this->getButtons()[0]) {
+            header('Location: ' . $this->getPageOf(0));
+            return [false];
+        }
+
         $i = 0;
 
         $intervalMin = self::PAGE_SIZE * $page;

@@ -10,8 +10,12 @@
                 Tirer l'affichage dans l'ordre <i class="fa fa-solid fa-chevron-down"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="<?= $links[0]; ?>">Trier dans l'ordre croissant</a></li>
-                <li><a class="dropdown-item" href="<?= $links[1]; ?>">Trier dans l'ordre décroissant</a></li>
+                <li><a class="dropdown-item" href="<?= $links[0]; ?>">Trier par nom dans l'ordre croissant</a></li>
+                <li><a class="dropdown-item" href="<?= $links[1]; ?>">Trier par nom dans l'ordre décroissant</a></li>
+
+                <li><a class="dropdown-item" href="<?= $links[2]; ?>">Trier par prix dans l'ordre croissant</a></li>
+                <li><a class="dropdown-item" href="<?= $links[3]; ?>">Trier par prix dans l'ordre décroissant</a></li>
+
             </ul>
         </div>
     </div>

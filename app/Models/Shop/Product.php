@@ -18,11 +18,8 @@ class Product extends Model {
 
     }
 
-    public function getByCategory($cat, $order = false) {
-        $text = "ORDER BY articles.name ASC;";
-        if($order) {
-            $text = "ORDER BY articles.name DESC;";
-        }
+    public function getByCategory($cat, $order = "asc") {
+        $text = $this->getOrder($order);
         return $this->db->prepare("
             SELECT *, articles.id as id, articles.name as name, category.name AS category
             FROM articles
@@ -31,11 +28,8 @@ class Product extends Model {
         " . $text, [$cat])->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getAll($order = false) {
-        $text = "ORDER BY articles.name ASC;";
-        if($order) {
-            $text = "ORDER BY articles.name DESC;";
-        }
+    public function getAll($order = "asc") {
+        $text = $this->getOrder($order);
         return $this->db->prepare("
             SELECT *, articles.id as id, articles.name as name, category.name AS category
             FROM articles
@@ -44,11 +38,8 @@ class Product extends Model {
 
     }
 
-    public function getAllMin($min, $order = false) {
-        $text = "ORDER BY articles.name ASC;";
-        if($order) {
-            $text = "ORDER BY articles.name DESC;";
-        }
+    public function getAllMin($min, $order = "asc") {
+        $text = $this->getOrder($order);
 
         return $this->db->prepare("
             SELECT *, articles.id as id, articles.name as name, category.name AS category
@@ -59,11 +50,8 @@ class Product extends Model {
 
     }
 
-    public function getAllMax($max, $order = false) {
-        $text = "ORDER BY articles.name ASC;";
-        if($order) {
-            $text = "ORDER BY articles.name DESC;";
-        }
+    public function getAllMax($max, $order = "asc") {
+        $text = $this->getOrder($order);
 
         return $this->db->prepare("
             SELECT *, articles.id as id, articles.name as name, category.name AS category
@@ -74,11 +62,8 @@ class Product extends Model {
 
     }
 
-    public function getAllBet($min, $max, $order = false) {
-        $text = "ORDER BY articles.name ASC;";
-        if($order) {
-            $text = "ORDER BY articles.name DESC;";
-        }
+    public function getAllBet($min, $max, $order = "asc") {
+        $text = $this->getOrder($order);
 
         return $this->db->prepare("
             SELECT *, articles.id as id, articles.name as name, category.name AS category
@@ -97,6 +82,21 @@ class Product extends Model {
             FROM articles
         ")->fetch(PDO::FETCH_OBJ)->minimum;
 
+    }
+
+    public function getOrder($order = "asc") {
+        $text = "ORDER BY articles.name ASC;";
+        if($order == "desc") {
+            $text = "ORDER BY articles.name DESC;";
+        } else if($order == "ascPrice") {
+            $text = "ORDER BY articles.price ASC;";
+        } else if($order == "descPrice") {
+            $text = "ORDER BY articles.price DESC;";
+        }
+
+
+
+        return $text;
     }
 
 
