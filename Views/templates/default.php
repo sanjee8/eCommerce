@@ -52,12 +52,14 @@
                     <a class="me-3 py-2 text-dark text-decoration-none" href="<?= $router->getLink("signin") ?>">Se connecter</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="<?= $router->getLink("signup") ?>">S'inscrire</a>
                 <?php endif; ?>
+                <?php if($session->isLogged()) : ?>
                 <button class="me-3 py-2 text-dark text-decoration-none btn position-relative" type="button" id="panier" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-cart-shopping"></i>
                     <span id="panier_counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
 
                     </span>
                 </button>
+
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><span class="dropdown-item-text text-uppercase text-center">Votre panier</span></li>
                     <li><hr class="dropdown-divider"></li>
@@ -81,7 +83,7 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <a class="btn btn-sm btn-success">Voir mon panier</a>
+                                    <a href="<?= $router->getLink("basket") ?>" class="btn btn-sm btn-success">Voir mon panier</a>
                                 </div>
 
                             </div>
@@ -89,6 +91,7 @@
                         </span>
                     </li>
                 </ul>
+                <?php endif; ?>
             </nav>
         </div>
     </header>
@@ -135,8 +138,21 @@
         </div>
     </footer>
 </div>
-
-
+<?php if(!$session->isLogged()) : ?>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="notLogged" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="fa fa-shopping-cart"></i>&nbsp;
+            <strong class="me-auto">Votre panier</strong>
+            <small>Erreur</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Vous devez être connecté pour ajouter un élément à votre panier !
+        </div>
+    </div>
+</div>
+<?php endif; ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/eCommerce/js/ajax.js"></script>
 <script src="/eCommerce/js/store.js"></script>

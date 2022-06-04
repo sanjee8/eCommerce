@@ -109,4 +109,22 @@ class Product extends Model {
 
     }
 
+    public function check($products) {
+        $array = [];
+        foreach ($products as $product) {
+            $prdt = $this->get($product->id);
+
+            if(isset($prdt->id)) {
+                if($prdt->amount > 0)
+                    array_push($array, $prdt);
+            }
+
+        }
+
+
+
+        return $array;
+
+    }
+
 }

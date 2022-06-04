@@ -60,6 +60,8 @@ class Login {
 
                     Model::getModel("Session\\Session")->log_in($data);
 
+
+
                     return [true, "<strong>Connexion réussie ! </strong> Veuillez patienter, vous allez être redirigé.<br />"];
 
                 } else {

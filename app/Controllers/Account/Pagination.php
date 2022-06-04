@@ -41,11 +41,12 @@ class Pagination {
         $array = [];
 
 
+
         if(isset($p['catId'])) {
 
             $array['catName'] = $p['catName'];
             $array['catId'] = $p['catId'];
-        } else if(isset($param['minPrice'])) {
+        } else if(isset($p['minPrice'])) {
 
             $array['minPrice'] = $p['minPrice'];
             $array['maxPrice'] = $p['maxPrice'];

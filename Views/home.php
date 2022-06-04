@@ -55,11 +55,16 @@
 
                     <div id="filter-prices">
 
-                        <label for="minPrice" class="form-label">Prix minimum</label>
-                        <input type="range" class="form-range" id="minPrice">
+                        <div class="input-group">
+                            <span class="input-group-text">Prix</span>
+                            <input id="minPriceFilter" type="number" aria-label="Prix minimal" placeholder="Prix mininal" class="form-control">
+                            <input id="maxPriceFilter" type="number" aria-label="Prix maximal" placeholder="Prix maximal" class="form-control">
+                        </div>
 
-                        <label for="maxPrice" class="form-label">Prix maximum</label>
-                        <input type="range" class="form-range" id="maxPrice">
+                        <div class="float-end mt-3">
+                            <button type="button" name="filter_by_prices" class="btn btn-primary btn-sm">Filtrer par prix</button>
+
+                        </div>
 
                     </div>
 
@@ -87,7 +92,17 @@
 
                             </div>
                             <div class="col-5 pt-0">
-                                <button type="button" name="buy_product" id="product_<?= $product->id ?>" class="w-100 btn btn-sm btn-outline-primary">Acheter</button>
+                                <button
+                                        type="button"
+                                        <?php if($session->isLogged()) : ?>
+                                        name="buy_product"
+                                        <?php else : ?>
+                                        name="buy_not_logged"
+                                        <?php endif;?>
+                                        id="product_<?= $product->id ?>"
+                                        class="w-100 btn btn-sm btn-outline-primary">
+                                    Acheter
+                                </button>
                             </div>
                         </div>
                     </div>

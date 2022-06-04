@@ -60,6 +60,19 @@ class AccountController extends Controller {
                 $success = new Alert($resp[1], "success");
                 $response = $success->render();
                 $link = Router::getRouter()->getLink("home");
+
+                $session = Model::getModel("Session\Session");
+                $products_logged = Model::getModel("Shop\Basket")->getBasketOf($session->get('id'));
+                $products_basket = [];
+                foreach ($products_logged as $pro) {
+
+                    $fproduct = Model::getModel("Shop\Product")->get($pro->product_id);
+                    array_push($products_basket, $fproduct);
+                }
+
+
+                setcookie("products", json_encode($products_basket), time() + 24*3600*7, '/');
+
                 header("Location: ". $link ."");
             } elseif(!$resp[0]) {
                 $error = new Alert($resp[1]);

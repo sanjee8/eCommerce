@@ -1,8 +1,10 @@
+const path = "/eCommerce/"
+
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    d.setTime(d.getTime() + (7*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    document.cookie = cname + "=" + cvalue + "; " +expires+ ";path=/";
 }
 
 function getCookie(cname) {
@@ -19,6 +21,11 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
 function reloadPanier() {
@@ -65,13 +72,43 @@ function reloadPanier() {
                 "                            </a>\n" +
                 "                        </li>");
         }
-        $("#panier_price").text(panier_price + " €")
+        $("#panier_price").text(round(panier_price, 2) + " €")
     }
 }
 
 $(document).ready(function() {
 
+    function addRequest(id) {
+
+        $.post(path+'request', {type:'add', id:id});
+
+    }
+
     reloadPanier();
+
+    $("[name='filter_by_prices']").click(function (e) {
+
+        let minPrice = $('#minPriceFilter').val();
+        let maxPrice = $('#maxPriceFilter').val();
+
+        if(maxPrice !== '' && minPrice !== '') {
+            document.location.href = path+minPrice+'~'+maxPrice
+        } else if( maxPrice !== '' && minPrice === '') {
+            document.location.href = path+'all~'+maxPrice
+        } else {
+            document.location.href = path+minPrice+'~all'
+        }
+
+    })
+
+    $("[name='buy_not_logged']").click(function (e) {
+
+        const toastElement = document.getElementById('notLogged')
+        const toast = new bootstrap.Toast(toastElement)
+
+        toast.show()
+
+    })
 
     $("[name='buy_product']").click(function (e) {
         let brut_id = $(this).attr('id').replace("product_", "");
@@ -98,6 +135,7 @@ $(document).ready(function() {
 
             arrayAll.push(obj)
         }
+        addRequest(brut_id);
         setCookie("products", JSON.stringify(arrayAll), 7);
 
 

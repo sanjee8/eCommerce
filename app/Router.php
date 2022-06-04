@@ -4,8 +4,10 @@ namespace App;
 
 use AltoRouter;
 use App\Controllers\Account\LogController;
+use App\Controllers\Basket\BasketController;
 use App\Controllers\Errors\ErrorsController;
 use App\Controllers\Page\PageController;
+use App\Controllers\Request\RequestController;
 use App\Controllers\Shop\ShopController;
 
 /**
@@ -101,6 +103,24 @@ class Router {
             "route" => "[a:catName]-[i:catId]/[a:order]/[i:page]",
             "post" => true
         ),
+        11 => array(
+            "name" => "basket",
+            "target" => "basket",
+            "route" => "basket",
+            "post" => true
+        ),
+        12 => array(
+            "name" => "basketDel",
+            "target" => "basket",
+            "route" => "basket/[i:productId]",
+            "post" => true
+        ),
+        13 => array(
+            "name" => "request",
+            "target" => "request",
+            "route" => "request",
+            "post" => true
+        ),
     );
 
     /**
@@ -188,6 +208,18 @@ class Router {
                     $this->category = 3;
                     $controller = new ShopController();
                     $controller->getByPrice();
+                    break;
+                case "basket":
+                    $this->actual = "Votre panier";
+                    $this->category = 9;
+                    $controller = new BasketController();
+                    $controller->panier();
+                    break;
+                case "request":
+                    $this->actual = "request";
+                    $this->category = 9999;
+                    $controller = new RequestController();
+                    $controller->add();
                     break;
             }
 

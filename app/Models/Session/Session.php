@@ -47,7 +47,7 @@ class Session extends Model {
     public function log_in($data) {
 
         $date = time();
-
+        $this->set_session("id", $data['id']);
         $this->set_session("email", $data['email']);
         $this->set_session("date_register", $data['date_register']);
         $this->set_session("prenom", $data['prenom']);

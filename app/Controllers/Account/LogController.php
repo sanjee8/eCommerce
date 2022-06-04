@@ -38,7 +38,8 @@ class LogController extends AccountController {
 
         $user = Model::getModel("Session\Session");
         $user->log_out();
-
+        unset($_COOKIE['products']);
+        setcookie("products", "[]", time() + 24*3600*7, '/');
         $link = Router::getRouter()->getLink("home");
 
         $this->render("Log.logout", compact("link"));
