@@ -26,6 +26,7 @@ class BasketController extends Controller {
 
         if(!$session->isLogged()) {
             header("Location: ". Router::getRouter()->getLink("signin") ."");
+            return;
         }
 
 
@@ -91,6 +92,41 @@ class BasketController extends Controller {
 
         $this->render("basket", compact("products", "basket", "response"));
 
+
+    }
+
+    public function order() {
+        $session = Model::getModel("Session\Session");
+
+        if(!$session->isLogged() || !isset($_POST['paymentOrder'])) {
+            header("Location: ". Router::getRouter()->getLink("signin") ."");
+            return;
+        }
+
+        $history = Model::getModel("Shop\History");
+
+
+        $products_brut = json_decode($_COOKIE['products']);
+
+
+        $products = Model::getModel("Shop\Product")->check($products_brut);
+
+        $basket = [];
+        $size = sizeof($products);
+        $basket["amount"] = $size;
+        $price = 0;
+
+        foreach ($products as $product) {
+            $price += $product->price;
+        }
+        $basket['price'] = $price;
+        $basket['final'] = $price + 5;
+
+        $history->addHistory($session->get("id"), $basket['final'], $products);
+        unset($_COOKIE['products']);
+        setcookie("products", "[]", time() + 24*3600*7, '/');
+
+        $this->render("order", compact("basket"));
 
     }
 

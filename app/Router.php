@@ -121,6 +121,12 @@ class Router {
             "route" => "request",
             "post" => true
         ),
+        14 => array(
+            "name" => "order",
+            "target" => "order",
+            "route" => "order",
+            "post" => true
+        ),
     );
 
     /**
@@ -220,6 +226,12 @@ class Router {
                     $this->category = 9999;
                     $controller = new RequestController();
                     $controller->add();
+                    break;
+                case "order":
+                    $this->actual = "Passer commande";
+                    $this->category = 8;
+                    $controller = new BasketController();
+                    $controller->order();
                     break;
             }
 
