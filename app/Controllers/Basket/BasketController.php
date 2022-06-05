@@ -111,6 +111,11 @@ class BasketController extends Controller {
 
         $products = Model::getModel("Shop\Product")->check($products_brut);
 
+        if(sizeof($products)< 1) {
+            header("Location: ". Router::getRouter()->getLink("signin") ."");
+            return;
+        }
+
         $basket = [];
         $size = sizeof($products);
         $basket["amount"] = $size;

@@ -32,14 +32,9 @@ class AccountController extends Controller {
         $session = Model::getModel("Session\Session");
 
         if($session->isLogged()) {
-            $g = $_GET;
-            if(isset($g["password"])) {
-                $this->response("App\Controllers\Account\Password", "Log.password");
-            } elseif (isset($g['email'])) {
-                $this->response("App\Controllers\Account\Email", "Log.email");
-            } else {
-                $this->render("log.account");
-            }
+
+            $this->render("Account.orders");
+
 
         } else {
             $link = Router::getRouter()->getLink("signin");

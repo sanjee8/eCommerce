@@ -3,6 +3,7 @@
 namespace App;
 
 use AltoRouter;
+use App\Controllers\Account\AccountController;
 use App\Controllers\Account\LogController;
 use App\Controllers\Basket\BasketController;
 use App\Controllers\Errors\ErrorsController;
@@ -127,6 +128,12 @@ class Router {
             "route" => "order",
             "post" => true
         ),
+        15 => array(
+            "name" => "account",
+            "target" => "account",
+            "route" => "account",
+            "post" => true
+        ),
     );
 
     /**
@@ -232,6 +239,12 @@ class Router {
                     $this->category = 8;
                     $controller = new BasketController();
                     $controller->order();
+                    break;
+                case "account":
+                    $this->actual = "Mon compte";
+                    $this->category = 50;
+                    $controller = new AccountController();
+                    $controller->account();
                     break;
             }
 
