@@ -36,5 +36,21 @@ class Category extends Model {
 
     }
 
+    public function add($name) {
+
+        $this->db->prepare("
+            INSERT INTO category(name)
+            VALUES(?)
+        ", [$name]);
+
+    }
+
+    public function delete($id) {
+        $this->db->prepare("
+            DELETE FROM category
+            WHERE id = ?
+        ", [$id]);
+    }
+
 
 }

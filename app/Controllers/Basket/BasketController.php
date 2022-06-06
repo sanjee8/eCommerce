@@ -22,6 +22,11 @@ class BasketController extends Controller {
 
 
     public function panier() {
+        if(Model::getModel("Session\Session")->get("admin") == 1) {
+            header("Location: ". Router::getRouter()->getLink("admin") ."");
+            return;
+        }
+
         $session = Model::getModel("Session\Session");
 
         if(!$session->isLogged()) {

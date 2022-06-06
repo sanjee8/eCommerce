@@ -7,6 +7,24 @@ use PDO;
 
 class Product extends Model {
 
+    public function add($name, $price, $description, $category, $image, $amount) {
+
+        $this->db->prepare("
+            INSERT INTO articles(name, price, description, category, image, amount)
+            VALUES(?,?,?,?,?,?)
+        ", [$name, $price, $description, $category, $image, $amount]);
+
+    }
+
+    public function delete($id) {
+
+        $this->db->prepare("
+            DELETE FROM articles
+            WHERE ID = ?
+        ", [$id]);
+
+    }
+
     public function get($id) {
 
         return $this->db->prepare("

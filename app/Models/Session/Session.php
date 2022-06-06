@@ -52,12 +52,16 @@ class Session extends Model {
         $this->set_session("date_register", $data['date_register']);
         $this->set_session("prenom", $data['prenom']);
         $this->set_session("nom", $data['nom']);
+        $this->set_session("admin", $data['admin']);
         $this->set_session("log_time", $date);
+
 
 
     }
 
     public function get($key) {
+        if(!$this->isLogged())
+            return null;
         return $_SESSION['user'][$key];
     }
 

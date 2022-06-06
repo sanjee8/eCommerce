@@ -5,6 +5,7 @@ namespace App;
 use AltoRouter;
 use App\Controllers\Account\AccountController;
 use App\Controllers\Account\LogController;
+use App\Controllers\Admin\AdminController;
 use App\Controllers\Basket\BasketController;
 use App\Controllers\Errors\ErrorsController;
 use App\Controllers\Page\PageController;
@@ -134,6 +135,24 @@ class Router {
             "route" => "account",
             "post" => true
         ),
+        16 => array(
+            "name" => "admin",
+            "target" => "admin",
+            "route" => "admin",
+            "post" => true
+        ),
+        17 => array(
+            "name" => "adminAction",
+            "target" => "admin",
+            "route" => "admin/[a:action]",
+            "post" => true
+        ),
+        18 => array(
+            "name" => "adminArticlesId",
+            "target" => "admin",
+            "route" => "admin/[a:action]/[i:id]",
+            "post" => true
+        ),
     );
 
     /**
@@ -245,6 +264,12 @@ class Router {
                     $this->category = 50;
                     $controller = new AccountController();
                     $controller->account();
+                    break;
+                case "admin":
+                    $this->actual = "Administration";
+                    $this->category = 99999;
+                    $controller = new AdminController();
+                    $controller->home();
                     break;
             }
 

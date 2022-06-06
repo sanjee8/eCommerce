@@ -18,7 +18,10 @@ class ShopController extends Controller {
     }
 
     public function home() {
-
+        if(Model::getModel("Session\Session")->get("admin") == 1) {
+            header("Location: ". Router::getRouter()->getLink("admin") ."");
+            return;
+        }
         $links = Tri::getLinks();
 
         $categories = Model::getModel("Shop\Category")->getAll();
@@ -29,6 +32,11 @@ class ShopController extends Controller {
 
 
     public function getByCategory() {
+
+        if(Model::getModel("Session\Session")->get("admin") == 1) {
+            header("Location: ". Router::getRouter()->getLink("admin") ."");
+            return;
+        }
 
         $param = Router::getRouter()->getParam();
 
@@ -74,7 +82,10 @@ class ShopController extends Controller {
     }
 
     public function getByPrice() {
-
+        if(Model::getModel("Session\Session")->get("admin") == 1) {
+            header("Location: ". Router::getRouter()->getLink("admin") ."");
+            return;
+        }
         $param = Router::getRouter()->getParam();
 
         $links = Tri::getLinks();

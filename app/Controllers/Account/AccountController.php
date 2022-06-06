@@ -31,9 +31,22 @@ class AccountController extends Controller {
 
         $session = Model::getModel("Session\Session");
 
+        if($session->get("admin") == 1) {
+            header("Location: ". Router::getRouter()->getLink("admin") ."");
+            return;
+        }
+
         if($session->isLogged()) {
 
-            $this->render("Account.orders");
+            $orders = Model::getModel("Shop\History")->getOrders($session->get("id"));
+            $productsOf = [];
+            foreach ($orders as $order) {
+
+                $productsOf[$order->id] = Model::getModel("Shop\History")->getProducts($order->id);
+
+            }
+
+            $this->render("Account.orders", compact("orders", "productsOf"));
 
 
         } else {
@@ -65,6 +78,10 @@ class AccountController extends Controller {
                     array_push($products_basket, $fproduct);
                 }
 
+                if($session->get("id") == 1) {
+                    header("Location: ". Router::getRouter()->getLink("admin") ."");
+                    return;
+                }
 
                 setcookie("products", json_encode($products_basket), time() + 24*3600*7, '/');
 

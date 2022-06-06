@@ -8,6 +8,7 @@ use App\Controllers\Account\Pagination;
 use App\Controllers\Account\Tri;
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
+use App\Router;
 
 /**
  * Class PageController
@@ -23,7 +24,10 @@ class PageController extends Controller {
     }
 
     public function home() {
-
+        if(Model::getModel("Session\Session")->get("admin") == 1) {
+            header("Location: ". Router::getRouter()->getLink("admin") ."");
+            return;
+        }
 
         $links = Tri::getLinks();
         $categories = Model::getModel("Shop\Category")->getAll();
