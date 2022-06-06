@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Account;
 
+use App\Core\Model\Model;
+use App\Database;
 use App\Router;
 
 class Pagination {
@@ -52,6 +54,7 @@ class Pagination {
             $array['maxPrice'] = $p['maxPrice'];
 
         } else {
+
             $array['catName'] = "all";
             $array['catId'] = 0;
         }
@@ -59,7 +62,8 @@ class Pagination {
         if(isset($p['order'])) {
             $array['order'] = $p['order'];
         } else {
-            $array['order'] = "asc";
+
+            $array['order'] = $order = Model::getModel("Contrainte\Contrainte")->get("articlesOrder");;
         }
 
 

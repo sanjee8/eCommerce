@@ -28,8 +28,13 @@ class LogController extends AccountController {
 
 
     public function register() {
+        if(!Model::getModel("Session\Session")->isLogged()) {
+            $this->response("App\Controllers\Account\Register", "Log.signup");
+        } else {
+            $link = Router::getRouter()->getLink("home");
+            header("Location: ". $link ."");
+        }
 
-        $this->response("App\Controllers\Account\Register", "Log.signup");
 
     }
 

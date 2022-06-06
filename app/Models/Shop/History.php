@@ -32,6 +32,7 @@ class History extends Model {
         return $this->db->prepare("
             SELECT * FROM history_orders
             WHERE user_id = ?
+            ORDER by date_of desc
         ", [$sessionId])->fetchAll(PDO::FETCH_OBJ);
 
     }

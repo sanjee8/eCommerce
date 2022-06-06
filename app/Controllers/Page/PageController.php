@@ -24,6 +24,8 @@ class PageController extends Controller {
     }
 
     public function home() {
+
+
         if(Model::getModel("Session\Session")->get("admin") == 1) {
             header("Location: ". Router::getRouter()->getLink("admin") ."");
             return;

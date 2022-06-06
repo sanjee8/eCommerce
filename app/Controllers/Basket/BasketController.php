@@ -113,8 +113,8 @@ class BasketController extends Controller {
 
         $products_brut = json_decode($_COOKIE['products']);
 
-
-        $products = Model::getModel("Shop\Product")->check($products_brut);
+        $productModel = Model::getModel("Shop\Product");
+        $products = $productModel->check($products_brut);
 
         if(sizeof($products)< 1) {
             header("Location: ". Router::getRouter()->getLink("signin") ."");
@@ -128,6 +128,7 @@ class BasketController extends Controller {
 
         foreach ($products as $product) {
             $price += $product->price;
+            $productModel->reduceProduct($product->id);
         }
         $basket['price'] = $price;
         $basket['final'] = $price + 5;

@@ -45,7 +45,7 @@ class ShopController extends Controller {
 
 
         if(isset($param['catId'])) {
-            $order = "asc";
+            $order = null;
             if(isset($param["order"])) {
                 $order = trim($param['order']);
             }

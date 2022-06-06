@@ -7,6 +7,16 @@ use PDO;
 
 class Product extends Model {
 
+    public function reduceProduct($id) {
+
+        $this->db->prepare("
+            UPDATE articles
+            SET amount = amount - 1
+            WHERE id = ?
+        ", [$id]);
+
+    }
+
     public function add($name, $price, $description, $category, $image, $amount) {
 
         $this->db->prepare("
@@ -36,7 +46,7 @@ class Product extends Model {
 
     }
 
-    public function getByCategory($cat, $order = "asc") {
+    public function getByCategory($cat, $order = null) {
         $text = $this->getOrder($order);
         return $this->db->prepare("
             SELECT *, articles.id as id, articles.name as name, category.name AS category
@@ -46,7 +56,7 @@ class Product extends Model {
         " . $text, [$cat])->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getAll($order = "asc") {
+    public function getAll($order = null) {
         $text = $this->getOrder($order);
         return $this->db->prepare("
             SELECT *, articles.id as id, articles.name as name, category.name AS category
@@ -56,7 +66,7 @@ class Product extends Model {
 
     }
 
-    public function getAllMin($min, $order = "asc") {
+    public function getAllMin($min, $order = null) {
         $text = $this->getOrder($order);
 
         return $this->db->prepare("
@@ -68,7 +78,7 @@ class Product extends Model {
 
     }
 
-    public function getAllMax($max, $order = "asc") {
+    public function getAllMax($max, $order = null) {
         $text = $this->getOrder($order);
 
         return $this->db->prepare("
@@ -80,7 +90,7 @@ class Product extends Model {
 
     }
 
-    public function getAllBet($min, $max, $order = "asc") {
+    public function getAllBet($min, $max, $order = null) {
         $text = $this->getOrder($order);
 
         return $this->db->prepare("
@@ -102,15 +112,27 @@ class Product extends Model {
 
     }
 
-    public function getOrder($order = "asc") {
-        $text = "ORDER BY articles.name ASC;";
-        if($order == "desc") {
+    public function getOrder($order = null) {
+
+        if($order == null) {
+
+
+            $order = Model::getModel("Contrainte\Contrainte")->get("articlesOrder");
+
+        }
+
+
+        if($order == "asc") {
+            $text = "ORDER BY articles.name ASC;";
+        } else if($order == "desc") {
             $text = "ORDER BY articles.name DESC;";
         } else if($order == "ascPrice") {
             $text = "ORDER BY articles.price ASC;";
         } else if($order == "descPrice") {
             $text = "ORDER BY articles.price DESC;";
         }
+
+
 
 
 

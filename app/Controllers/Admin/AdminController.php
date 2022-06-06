@@ -114,6 +114,26 @@ class AdminController extends Controller {
 
             $this->render("Admin.category", compact("response", "categories"));
 
+        } else if(isset($param['action']) && $param['action'] == "articlesOrder") {
+
+            $response = "";
+            $contrainteModel = Model::getModel("Contrainte\Contrainte");
+
+            if(isset($_POST['orderSave'])) {
+
+                $value = trim($_POST['value']);
+
+                $contrainteModel->set("articlesOrder", $value);
+
+
+                $alertSuccess = new Alert("L'ordre a bien été enregistré !", "success");
+                $response = $alertSuccess->render();
+
+            }
+
+            $selectedOrder = $contrainteModel->get("articlesOrder");
+            $this->render("Admin.orderArticle", compact("response", "selectedOrder"));
+
         } else {
             $latest = Model::getModel("Shop\History")->getOrdersAdmin();
             $this->render("Admin.home", compact("latest"));
