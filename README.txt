@@ -1,7 +1,7 @@
 Équipe composée de :
 RAMMOHAN Ramsanjeevan
 ALBIEVOK Ali
-KAJIRI Anas
+KADIRI Anas
 
 
 
