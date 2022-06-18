@@ -9,17 +9,6 @@ use App\Router;
 
 class BasketController extends Controller {
 
-    # Template
-    protected $template = "default";
-
-    /**
-     * AccountController constructor.
-     */
-    public function __construct() {
-        $this->viewPath = ROOT . '\\eCommerce\\Views\\';
-    }
-
-
 
     public function panier() {
         if(Model::getModel("Session\Session")->get("admin") == 1) {

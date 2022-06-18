@@ -14,7 +14,15 @@ class Controller {
 
 
     protected $viewPath;
-    protected $template;
+    protected $template = "default";
+
+
+    public function __construct() {
+
+        $general = include "Config/General.php";
+
+        $this->viewPath = $general['view'];
+    }
 
     /**
      * Render page

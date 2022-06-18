@@ -8,6 +8,7 @@
 
         <div class="accordion accordion-flush" id="ordersHistory">
             <?php
+            echo $response;
             $i = 0;
             foreach ($orders as $order) { ?>
             <div class="accordion-item">

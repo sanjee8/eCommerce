@@ -16,12 +16,6 @@ use App\Router;
  */
 class PageController extends Controller {
 
-    protected $template = "default";
-
-
-    public function __construct() {
-        $this->viewPath = ROOT . '\\eCommerce\\Views\\';
-    }
 
     public function home() {
 

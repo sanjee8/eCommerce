@@ -10,12 +10,6 @@ use App\Router;
 
 class ShopController extends Controller {
 
-    protected $template = "default";
-
-
-    public function __construct() {
-        $this->viewPath = ROOT . '\\eCommerce\\Views\\';
-    }
 
     public function home() {
         if(Model::getModel("Session\Session")->get("admin") == 1) {

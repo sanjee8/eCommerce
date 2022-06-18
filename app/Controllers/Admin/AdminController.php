@@ -5,23 +5,12 @@ namespace App\Controllers\Admin;
 use App\Controllers\Utils\Alert;
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
-use App\Models\Session\Session;
 use App\Router;
 
 class AdminController extends Controller {
 
     # Template
     protected $template = "admin";
-
-    /**
-     * AccountController constructor.
-     */
-    public function __construct() {
-
-
-        $this->viewPath = ROOT . '\\eCommerce\\Views\\';
-    }
-
 
     public function home() {
 

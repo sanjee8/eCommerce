@@ -15,18 +15,6 @@ use App\Router;
  */
 class AccountController extends Controller {
 
-    # Template
-    protected $template = "default";
-
-    /**
-     * AccountController constructor.
-     */
-    public function __construct() {
-
-
-        $this->viewPath = ROOT . '\\eCommerce\\Views\\';
-    }
-
     public function account() {
 
         $session = Model::getModel("Session\Session");
@@ -39,6 +27,11 @@ class AccountController extends Controller {
         if($session->isLogged()) {
 
             $orders = Model::getModel("Shop\History")->getOrders($session->get("id"));
+            $response = "";
+            if(sizeof($orders) == 0) {
+                $message = new Alert("Vous n'avez encore passé aucune commande !", "warning");
+                $response = $message->render();
+            }
             $productsOf = [];
             foreach ($orders as $order) {
 
@@ -46,7 +39,7 @@ class AccountController extends Controller {
 
             }
 
-            $this->render("Account.orders", compact("orders", "productsOf"));
+            $this->render("Account.orders", compact("orders", "productsOf", "response"));
 
 
         } else {

@@ -44,6 +44,7 @@
                         <div class="form-check form-check-inline">
                             <a class="btn btn-light btn-sm inline" href="<?= $router->getLink("productsCat", ["catName" => $category->name,"catId" => $category->id]) ?>">» <?= $category->name ?></a>
                         </div>
+                            <br />
                         <?php } ?>
                     </div>
 

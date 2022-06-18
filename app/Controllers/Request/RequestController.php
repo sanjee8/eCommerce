@@ -9,12 +9,6 @@ use App\Router;
 class RequestController extends Controller {
 
 
-    protected $template = "default";
-
-
-    public function __construct() {
-        $this->viewPath = ROOT . '\\eCommerce\\Views\\';
-    }
 
     public function add() {
 

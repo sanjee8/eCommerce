@@ -12,12 +12,6 @@ use App\Core\Controller\Controller;
  */
 class ErrorsController extends Controller {
 
-    protected $template = "default";
-
-    public function __construct() {
-
-        $this->viewPath = ROOT . '\\eCommerce\\Views\\';
-    }
 
     /**
      * Render page 404

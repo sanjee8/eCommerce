@@ -2,7 +2,6 @@
 namespace App;
 use Exception;
 use PDO;
-use PDOException;
 
 /**
  * Class Database
@@ -37,17 +36,15 @@ class Database {
 
     /**
      * Database constructor.
-     * @param string $db_name
-     * @param string $db_user
-     * @param string $db_pass
-     * @param string $db_host
      */
-    public function __construct($db_name = "ecommerce", $db_user = "root", $db_pass = '', $db_host= "localhost") {
+    public function __construct() {
 
-        $this->db_name = $db_name;
-        $this->db_host = $db_host;
-        $this->db_pass = $db_pass;
-        $this->db_user = $db_user;
+        $database = include("Config/Database.php");
+
+        $this->db_name = $database['db_name'];
+        $this->db_host = $database['db_host'];
+        $this->db_pass = $database['db_pass'];
+        $this->db_user = $database['db_user'];
 
     }
 
