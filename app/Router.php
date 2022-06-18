@@ -37,7 +37,7 @@ class Router {
     private $router;
 
     # Root path
-    private $path = "/eCommerce/";
+    private $path;
 
     # Params
     private $params;
@@ -154,6 +154,14 @@ class Router {
             "post" => true
         ),
     );
+
+    public function __construct() {
+
+        $general = include "Config/General.php";
+
+        $this->path = $general['path'];
+
+    }
 
     /**
      * Return singleton Router

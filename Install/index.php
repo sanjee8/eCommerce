@@ -41,12 +41,20 @@
             $dbUser = "";
             $dbName = "";
             $viewPath = "";
+            $path = "";
 
             if(isset($post['viewPath']) && !empty($post['viewPath'])) {
                 $viewPath = $post['viewPath'];
             } else {
                 $errors++;
                 $err_messages .= "- Vous devez spécifier le ViewPath ! <br />";
+            }
+
+            if(isset($post['path']) && !empty($post['path'])) {
+                $path = $post['path'];
+            } else {
+                $errors++;
+                $err_messages .= "- Vous devez spécifier le Path ! <br />";
             }
 
             if(isset($post['dbHost']) && !empty($post['dbHost'])) {
@@ -94,6 +102,7 @@
                 file_put_contents("../Config/Database.php", stringify(var_export($dbArray, true)));
 
                 $generalArray = 'array(
+                    "path" => "'. $path . '",
                     "view" => ROOT . "'.$viewPath.'"
                 )';
 
@@ -127,6 +136,13 @@
 
         <div class="mb-3">
             <h1 class="h5 mb-3 fw-normal">Informations générales</h1>
+
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="path" name="path" placeholder="Où est hébergé votre site ?" value="/eCommerce/">
+                <label for="path">Path</label>
+            </div>
+
             <div class="form-floating">
                 <input type="text" class="form-control" id="viewPath" name="viewPath" placeholder="Où se situe votre dossier Views ?" value="\\eCommerce\\Views\\">
                 <label for="viewPath">View Path</label>
@@ -134,7 +150,7 @@
 
 
             <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#infoPathView">
-                Qu'est ce que le PathView ?
+                Qu'est ce que le PathView ou le Path ?
             </button>
 
 
@@ -144,13 +160,23 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">PathView</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">PathView & Path</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <strong>ViewPath</strong><br />
                             Chemin où se situe votre dossier Views par rapport au nom de domaine. <br>
                             Par exemple, si vous avez hébergé le site sur : localhost/test, <br/>
                             alors le chemin sera : <strong>\\test\\Views\\</strong>
+
+
+                            <hr />
+                            <strong>Path</strong><br />
+                            Dossier où se situe votre site par rapport au nom de domaine.<br />
+                            Par exemple, si vous avez hébergé le site sur : localhost/test, <br />
+                            alors le path sera : <strong>/test/</strong><br />
+                            Si il est à la racine : <strong>/</strong>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

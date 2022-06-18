@@ -22,6 +22,8 @@ pouvez supprimer le dossier install.
 - Rendez vous dans le dossier Config pour rentrer les accès de la base de données
 - Dans Config/General.php, vous devez spécifier où se situe le dossier Views rapport à votre nom de domaine.
 (exemple : si le domaine est localhost/eCommerce, alors le pathView = ROOT . "\\eCommerce\\Views\\" )
+Et saisir dans Path le chemin où est hébergé votre site, site c'est hébergé sur <nom de domaine/localhost>/eCommerce/
+alors ça sera "/eCommerce/" ou sinon c'est à la racine ça sera "/".
 - Exécutez le fichier ecommerce.sql qui se trouve dans le dossier install.
 
 
