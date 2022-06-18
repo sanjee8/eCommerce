@@ -99,7 +99,7 @@ class ShopController extends Controller {
 
             $minPrice = trim($param['minPrice']);
             $maxPrice = trim($param['maxPrice']);
-
+            $products_brut = [];
             if($maxPrice == 'all' AND $minPrice == 'all') {
                 header('Location: ' . Router::getRouter()->getLink("home"));
             } else if($maxPrice == 'all') {

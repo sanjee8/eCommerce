@@ -3,7 +3,6 @@
 namespace App\Controllers\Account;
 
 use App\Core\Model\Model;
-use App\Database;
 use App\Router;
 
 class Pagination {

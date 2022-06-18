@@ -4,7 +4,6 @@ namespace App\Controllers\Request;
 
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
-use App\Router;
 
 class RequestController extends Controller {
 

@@ -51,9 +51,9 @@ class Checks {
 
         $error_msg = "";
         $errors = 0;
-
+        $identifiant = trim($id);
         if(isset($id)) {
-            $identifiant = trim($id);
+
             $identifiant = htmlentities($identifiant, ENT_NOQUOTES, 'utf-8');
             $identifiant = preg_replace('#&([A-za-z])(?:acute|cedil|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $identifiant);
             $identifiant = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $identifiant); // pour les ligatures e.g. '&oelig;'
