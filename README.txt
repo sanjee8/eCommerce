@@ -25,6 +25,17 @@ pouvez supprimer le dossier install.
 - Exécutez le fichier ecommerce.sql qui se trouve dans le dossier install.
 
 
+Comptes :
+
+Vous pouvez créer un compte ou utiliser :
+    email : mot de passe
+    - test@test.fr : test
+
+Compte admin :
+    email : mot de passe
+    - admin@test.fr : admin
+
+
 
 GitHub:
 https://github.com/sanjee8/eCommerce
