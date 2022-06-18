@@ -25,6 +25,13 @@ pouvez supprimer le dossier install.
 - Exécutez le fichier ecommerce.sql qui se trouve dans le dossier install.
 
 
+ATTENTION:
+Vous devez dans tous les CAS modifier le fichier .htaccess ( racine ), la deuxième ligne:
+Si votre site est hébergé à la racine :
+RewriteBase /
+Si dans un dossier "eCommerce" :
+RewriteBase /eCommerce/
+
 Comptes :
 
 Vous pouvez créer un compte ou utiliser :
@@ -37,5 +44,5 @@ Compte admin :
 
 
 
-GitHub:
+GitHub :
 https://github.com/sanjee8/eCommerce
