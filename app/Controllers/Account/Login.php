@@ -60,6 +60,28 @@ class Login {
 
                     Model::getModel("Session\\Session")->log_in($data);
 
+                    $products_brut = Model::getModel("Shop\Basket")->getBasketOf($data['id']);
+                    $products = Model::getModel("Shop\Product")->check($products_brut);
+                    $size = sizeof($products);
+                    $array_cookie = [];
+                    foreach ($products as $product) {
+                        $obj = array(
+                            "name" => $product->name,
+                            "price" => $product->price,
+                            "image" => $product->image,
+                            "id" => $product->id,
+                        );
+                        array_push($array_cookie, $obj);
+                    }
+
+                    if($size > 0) {
+                        $products_string = json_encode($array_cookie);
+                        setcookie("products", $products_string, time() + 24*3600*7, '/');
+
+                    } else {
+                        unset($_COOKIE['products']);
+                        setcookie("products", "[]", time() + 24*3600*7, '/');
+                    }
 
 
                     return [true, "<strong>Connexion réussie ! </strong> Veuillez patienter, vous allez être redirigé.<br />"];

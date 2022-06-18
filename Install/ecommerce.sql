@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 18 juin 2022 à 14:42
+-- Généré le :  sam. 18 juin 2022 à 18:05
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -48,7 +48,7 @@ INSERT INTO `articles` (`id`, `name`, `description`, `price`, `category`, `image
 (18, 'Galaxy S22 Ultra', 'SAMSUNG GALAXY S22 Ultra 128Go Noir  (sans KP)', 1432, 1, 'https://www.cdiscount.com/pdt2/1/4/0/1/700x700/sam8806092879140/rw/samsung-galaxy-s22-ultra-128go-noir-sans-kp.jpg', 9),
 (19, 'Xiaomi 12', 'XIAOMI 12 256 Go BLEU', 870, 1, 'https://www.cdiscount.com/pdt2/5/6/b/1/700x700/xiaomi128256b/rw/xiaomi-12-256-go-bleu.jpg', 5),
 (20, 'Huawei P30 Pro', 'HUAWEI P30 Pro 128 Go Bleu Mystique', 499, 1, 'https://www.cdiscount.com/pdt2/2/8/a/1/700x700/huaweip30pro128a/rw/huawei-p30-pro-128-go-bleu-mystique.jpg', 3),
-(21, 'Realme 8', 'REALME 8 128 Go Noir 5G', 189, 1, 'https://www.cdiscount.com/pdt2/2/3/5/1/700x700/rea6941399047235/rw/realme-8-128-go-noir-5g.jpg', 4),
+(21, 'Realme 8', 'REALME 8 128 Go Noir 5G', 189, 1, 'https://www.cdiscount.com/pdt2/2/3/5/1/700x700/rea6941399047235/rw/realme-8-128-go-noir-5g.jpg', 2),
 (22, 'PC Portable Gamer 15', 'PC Portable Gamer HP Pavilion Gaming 15-ec1018nf - 15\" FHD - Ryzen 5 - RAM 8 Go - Stockage 512 Go - GTX 1650Ti - Windows 10 - AZERTY', 599.99, 2, 'https://www.cdiscount.com/pdt2/8/n/f/1/550x550/hp15ec1018nf/rw/pc-portable-gamer-hp-pavilion-gaming-15-ec1018nf.jpg', 14),
 (23, 'PC Portable 17', 'PC Portable HP 17-cp0059nf - 17\" HD - Ryzen 3 - RAM 4 Go - 256 Go - Windows 10 - AZERTY + Souris sans fil HP 200 noir', 399.99, 2, 'https://www.cdiscount.com/pdt2/x/6/w/1/550x550/bunhp17cp0059x6w/rw/pc-portable-hp-17-cp0059nf-17-hd-ryzen-3-ra.jpg', 30),
 (24, 'PC Gamer - Acer Predator', 'PC Gamer - ACER Predator PO3-630 Clavier & Souris - Core i5-11400F - RAM 16 Go - Stockage 512 Go SSD - RTX 3070 - Windows 10', 1514.99, 2, 'https://www.cdiscount.com/pdt2/0/0/y/1/700x700/dge2cef00y/rw/pc-gamer-acer-predator-po3-630-clavier-souris.jpg', 5),
@@ -60,8 +60,8 @@ INSERT INTO `articles` (`id`, `name`, `description`, `price`, `category`, `image
 (29, 'PC Tout-en-un ASUS Vivo', 'PC Tout-en-un ASUS Vivo AIO V222GAK-WA229T - 21,5\" FHD - Intel Pentium J5040 - RAM 8Go - SSD 256Go - Clavier + Souris - Windows 10', 519.99, 2, 'https://www.cdiscount.com/pdt2/2/9/t/1/550x550/v222gakwa229t/rw/pc-tout-en-un-asus-vivo-aio-v222gak-wa229t-21-5.jpg', 8),
 (30, 'PC Tout-en-un ASUS Zen', 'PC Tout-en-un ASUS Zen AIO 22 A5200WFAK-WA080T - 21.5\" FHD - Core i3-10110U - RAM 8Go - SSD 256Go - Windows 10 - Clavier + Souris', 599.99, 2, 'https://www.cdiscount.com/pdt2/8/0/t/1/700x700/a5200wfakwa080t/rw/pc-tout-en-un-asus-zen-aio-22-a5200wfak-wa080t-2.jpg', 6),
 (31, 'PC Tout-en-un LENOVO Ideacentre', 'Ordinateur Tout-en-un - LENOVO Ideacentre 3 27ITL6 - 27\'\' FHD - i5-1135G7 - RAM 16Go - 512Go SSD - Windows 10 + Clavier souris', 1070.6, 2, 'https://www.cdiscount.com/pdt2/p/f/r/1/700x700/f0fw001pfr/rw/ordinateur-tout-en-un-lenovo-ideacentre-3-27itl6.jpg', 30),
-(32, 'Ecran PC Gamer', 'Ecran PC Gamer ASUS VG248QG 24\" - TN - FHD (1920x1080) - 165Hz - 1 ms - G-Sync - FreeSync - HDMI - DVI - DisplayPort - Noir', 179.99, 5, 'https://www.cdiscount.com/pdt2/0/1/6/1/550x550/asu4718017119016/rw/ecran-pc-gamer-asus-vg248qg-24-tn-fhd-1920x1.jpg', 5),
-(33, 'Ecran PC Gamer Acer', 'Ecran PC Gamer - ACER - Nitro XV253QPbmiiprzx - 24,5\" FHD - Dalle IPS - 1 MS - 165 Hz - HDMI/Display Port 1.2/Audio - AMD FreeSync', 229.99, 5, 'https://www.cdiscount.com/pdt2/p/0/4/1/700x700/umkx3eep04/rw/ecran-pc-gamer-acer-nitro-xv253qpbmiiprzx-24.jpg', 7),
+(32, 'Ecran PC Gamer', 'Ecran PC Gamer ASUS VG248QG 24\" - TN - FHD (1920x1080) - 165Hz - 1 ms - G-Sync - FreeSync - HDMI - DVI - DisplayPort - Noir', 179.99, 5, 'https://www.cdiscount.com/pdt2/0/1/6/1/550x550/asu4718017119016/rw/ecran-pc-gamer-asus-vg248qg-24-tn-fhd-1920x1.jpg', 3),
+(33, 'Ecran PC Gamer Acer', 'Ecran PC Gamer - ACER - Nitro XV253QPbmiiprzx - 24,5\" FHD - Dalle IPS - 1 MS - 165 Hz - HDMI/Display Port 1.2/Audio - AMD FreeSync', 229.99, 5, 'https://www.cdiscount.com/pdt2/p/0/4/1/700x700/umkx3eep04/rw/ecran-pc-gamer-acer-nitro-xv253qpbmiiprzx-24.jpg', 6),
 (34, 'Ecran PC Gamer IncurvÃ© VIEWSONIC', 'Ecran PC Gamer IncurvÃ© - VIEWSONIC VX3218 - PC - MHD - 32\" FHD - Dalle VA - 1 ms - 165Hz - DisplayPort - AMD FreeSync', 219.99, 5, 'https://www.cdiscount.com/pdt2/m/h/d/1/550x550/vx3218pcmhd/rw/ecran-pc-gamer-incurve-viewsonic-vx3218-pc-m.jpg', 9);
 
 -- --------------------------------------------------------
@@ -76,22 +76,7 @@ CREATE TABLE IF NOT EXISTS `basket` (
   `user` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `basket`
---
-
-INSERT INTO `basket` (`id`, `user`, `product_id`) VALUES
-(20, 1, 1),
-(19, 1, 3),
-(22, 1, 1),
-(21, 1, 1),
-(16, 1, 4),
-(13, 1, 1),
-(17, 1, 3),
-(23, 1, 32),
-(24, 1, 21);
+) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -149,14 +134,16 @@ CREATE TABLE IF NOT EXISTS `history_orders` (
   `date_of` int(11) NOT NULL,
   `final_price` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `history_orders`
 --
 
 INSERT INTO `history_orders` (`id`, `user_id`, `date_of`, `final_price`) VALUES
-(8, 1, 1655556123, 373.99);
+(8, 1, 1655556123, 373.99),
+(9, 1, 1655568049, 414.98),
+(10, 1, 1655568196, 562.99);
 
 -- --------------------------------------------------------
 
@@ -171,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `order_articles` (
   `order_id` int(11) NOT NULL,
   `price` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `order_articles`
@@ -179,7 +166,12 @@ CREATE TABLE IF NOT EXISTS `order_articles` (
 
 INSERT INTO `order_articles` (`id`, `product_id`, `order_id`, `price`) VALUES
 (10, 21, 8, 189),
-(9, 32, 8, 179.99);
+(9, 32, 8, 179.99),
+(11, 33, 9, 229.99),
+(12, 32, 9, 179.99),
+(13, 32, 10, 179.99),
+(14, 21, 10, 189),
+(15, 21, 10, 189);
 
 -- --------------------------------------------------------
 

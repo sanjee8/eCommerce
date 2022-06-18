@@ -32,16 +32,21 @@ class BasketController extends Controller {
         $products = Model::getModel("Shop\Product")->check($products_brut);
 
         $params = Router::getRouter()->getParam();
+        $size = sizeof($products);
 
         if(isset($params['productId'])) {
             $index = intval($params['productId']);
 
 
-            Model::getModel("Shop\Basket")->deleteOne($session->get("id"),$products[$index]->id);
+            if($size-1 >= $index) {
+                Model::getModel("Shop\Basket")->deleteOne($session->get("id"),$products[$index]->id);
 
-            array_splice($products, $index, 1);
-            $alert = new Alert("L'article a bien été supprimé de votre panier !", "success");
-            $response = $alert->render();
+                array_splice($products, $index, 1);
+                $alert = new Alert("L'article a bien été supprimé de votre panier !", "success");
+                $response = $alert->render();
+            }
+
+
 
 
 
@@ -52,7 +57,7 @@ class BasketController extends Controller {
 
 
         $basket = [];
-        $size = sizeof($products);
+
         $basket["amount"] = $size;
         $price = 0;
         $array_cookie = [];
@@ -118,6 +123,7 @@ class BasketController extends Controller {
         foreach ($products as $product) {
             $price += $product->price;
             $productModel->reduceProduct($product->id);
+            Model::getModel("Shop\Basket")->deleteOne($session->get("id"),$product->id);
         }
         $basket['price'] = $price;
         $basket['final'] = $price + 5;
