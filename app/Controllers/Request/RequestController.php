@@ -22,7 +22,7 @@ class RequestController extends Controller {
 
                     $session = Model::getModel("Session\Session");
                     if($session->isLogged()) {
-                        var_dump($id);
+
                         $request = Model::getModel("Shop\Basket");
                         $request->add($session->get("id"), $id);
                         echo "added!";

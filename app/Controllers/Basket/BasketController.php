@@ -18,16 +18,10 @@ class BasketController extends Controller {
 
         $session = Model::getModel("Session\Session");
 
-        if(!$session->isLogged()) {
-            header("Location: ". Router::getRouter()->getLink("signin") ."");
-            return;
-        }
-
 
         $response = "";
 
         $products_brut = json_decode($_COOKIE['products']);
-
 
         $products = Model::getModel("Shop\Product")->check($products_brut);
 
@@ -37,7 +31,6 @@ class BasketController extends Controller {
         if(isset($params['productId'])) {
             $index = intval($params['productId']);
 
-
             if($size-1 >= $index) {
                 Model::getModel("Shop\Basket")->deleteOne($session->get("id"),$products[$index]->id);
 
@@ -46,15 +39,7 @@ class BasketController extends Controller {
                 $response = $alert->render();
             }
 
-
-
-
-
         }
-
-
-
-
 
         $basket = [];
 
@@ -74,27 +59,25 @@ class BasketController extends Controller {
         $basket['price'] = $price;
         $basket['final'] = $price + 5;
 
-
-
         if($size > 0) {
             $products_string = json_encode($array_cookie);
             setcookie("products", $products_string, time() + 24*3600*7, '/');
-
         } else {
-
             unset($_COOKIE['products']);
             setcookie("products", "[]", time() + 24*3600*7, '/');
         }
 
-
-
-
         $this->render("basket", compact("products", "basket", "response"));
-
 
     }
 
     public function order() {
+
+        if(Model::getModel("Session\Session")->get("admin") == 1) {
+            header("Location: ". Router::getRouter()->getLink("admin") ."");
+            return;
+        }
+
         $session = Model::getModel("Session\Session");
 
         if(!$session->isLogged() || !isset($_POST['paymentOrder'])) {

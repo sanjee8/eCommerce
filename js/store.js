@@ -76,11 +76,71 @@ function reloadPanier() {
     }
 }
 
+
 $(document).ready(function() {
 
     function addRequest(id) {
 
         $.post(path+'request', {type:'add', id:id});
+
+    }
+
+    function addInPanier(clicked, cookieName = false) {
+        let brut_id = $(clicked).attr('id').replace("product_", "");
+
+        let id = $(clicked).attr('id')+"_content";
+        let product_string = "#"+id+" h4";
+        let product_price = $.trim($(product_string+"[name='price_product']").text());
+        let product_name = $.trim($(product_string+"[name='name_product']").text());
+        let product_img = $.trim($("#"+id+" img").attr("src"));
+
+        let all = getCookie("products");
+        let arrayAll = []
+        let obj = {
+            id: brut_id,
+            name: product_name,
+            price: product_price,
+            image: product_img
+        }
+        if(all !== "" && all !== null) {
+
+            arrayAll = JSON.parse(all);
+            arrayAll.push(obj)
+        } else {
+
+            arrayAll.push(obj)
+        }
+        if(!cookieName) {
+            addRequest(brut_id);
+        }
+        setCookie("products", JSON.stringify(arrayAll), 7);
+        if(cookieName) {
+            setCookie("productsNOTLOGGED", JSON.stringify(arrayAll), 7);
+        }
+
+
+
+        $("#"+id).append("<div class=\"toast-container position-fixed bottom-0 end-0 p-3\">\n" +
+            "  <div id=\"liveToast\" class=\"toast\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">\n" +
+            "    <div class=\"toast-header\">\n" +
+            "      <i class=\"fa fa-shopping-cart\"></i>&nbsp;\n" +
+            "      <strong class=\"me-auto\"> Votre panier</strong>\n" +
+            "      <small>Succès</small>\n" +
+            "      <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n" +
+            "    </div>\n" +
+            "    <div class=\"toast-body text-black\">\n" +
+            "      Le produit a bien été ajouté à votre panier.\n" +
+            "    </div>\n" +
+            "  </div>\n" +
+            "</div>");
+
+        const toastElement = document.getElementById('liveToast')
+        const toast = new bootstrap.Toast(toastElement)
+
+        toast.show()
+
+        reloadPanier();
+
 
     }
 
@@ -111,56 +171,11 @@ $(document).ready(function() {
     })
 
     $("[name='buy_product']").click(function (e) {
-        let brut_id = $(this).attr('id').replace("product_", "");
+        addInPanier(this);
+    })
 
-        let id = $(this).attr('id')+"_content";
-        let product_string = "#"+id+" h4";
-        let product_price = $.trim($(product_string+"[name='price_product']").text());
-        let product_name = $.trim($(product_string+"[name='name_product']").text());
-        let product_img = $.trim($("#"+id+" img").attr("src"));
+    $("[name='buy_product_not_logged']").click(function (e) {
 
-        let all = getCookie("products");
-        let arrayAll = []
-        let obj = {
-            id: brut_id,
-            name: product_name,
-            price: product_price,
-            image: product_img
-        }
-        if(all !== "" && all !== null) {
-
-            arrayAll = JSON.parse(all);
-            arrayAll.push(obj)
-        } else {
-
-            arrayAll.push(obj)
-        }
-        addRequest(brut_id);
-        setCookie("products", JSON.stringify(arrayAll), 7);
-
-
-
-        $("#"+id).append("<div class=\"toast-container position-fixed bottom-0 end-0 p-3\">\n" +
-            "  <div id=\"liveToast\" class=\"toast\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\">\n" +
-            "    <div class=\"toast-header\">\n" +
-            "      <i class=\"fa fa-shopping-cart\"></i>&nbsp;\n" +
-            "      <strong class=\"me-auto\"> Votre panier</strong>\n" +
-            "      <small>Succès</small>\n" +
-            "      <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n" +
-            "    </div>\n" +
-            "    <div class=\"toast-body text-black\">\n" +
-            "      Le produit a bien été ajouté à votre panier.\n" +
-            "    </div>\n" +
-            "  </div>\n" +
-            "</div>");
-
-        const toastElement = document.getElementById('liveToast')
-        const toast = new bootstrap.Toast(toastElement)
-
-        toast.show()
-
-        reloadPanier();
-
-
+        addInPanier(this, true);
     })
 });

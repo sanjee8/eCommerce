@@ -74,7 +74,6 @@
         </div>
 
         <div class="col-9">
-
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
                 <?php foreach ($products as $product ) { ?>
                 <div class="col">
@@ -98,7 +97,7 @@
                                         <?php if($session->isLogged()) : ?>
                                         name="buy_product"
                                         <?php else : ?>
-                                        name="buy_not_logged"
+                                        name="buy_product_not_logged"
                                         <?php endif;?>
                                         id="product_<?= $product->id ?>"
                                         class="w-100 btn btn-sm btn-outline-primary">

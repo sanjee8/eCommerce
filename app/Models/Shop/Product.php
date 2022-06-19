@@ -149,10 +149,16 @@ class Product extends Model {
 
     }
 
-    public function check($products) {
+    public function check($products, $login = false) {
         $array = [];
         foreach ($products as $product) {
-            $prdt = $this->get($product->id);
+            if($login) {
+                $prdt = $this->get($product->product_id);
+            } else {
+                $prdt = $this->get($product->id);
+            }
+
+
 
             if(isset($prdt->id)) {
                 if($prdt->amount > 0)

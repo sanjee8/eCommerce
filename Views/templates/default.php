@@ -53,7 +53,7 @@
                     <a class="me-3 py-2 text-dark text-decoration-none" href="<?= $router->getLink("signin") ?>">Se connecter</a>
                     <a class="me-3 py-2 text-dark text-decoration-none" href="<?= $router->getLink("signup") ?>">S'inscrire</a>
                 <?php endif; ?>
-                <?php if($session->isLogged()) : ?>
+
                 <button class="me-3 py-2 text-dark text-decoration-none btn position-relative" type="button" id="panier" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-cart-shopping"></i>
                     <span id="panier_counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -92,7 +92,7 @@
                         </span>
                     </li>
                 </ul>
-                <?php endif; ?>
+
             </nav>
         </div>
     </header>

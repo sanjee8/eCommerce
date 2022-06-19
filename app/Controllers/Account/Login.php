@@ -58,10 +58,30 @@ class Login {
 
                 if(password_verify($password, $data['password'])) {
 
+
+
                     Model::getModel("Session\\Session")->log_in($data);
 
+                    if(isset($_COOKIE['productsNOTLOGGED'])) {
+                        $pCookiesNL = json_decode($_COOKIE['productsNOTLOGGED']);
+
+                        foreach ($pCookiesNL as $pNL) {
+
+                            $request = Model::getModel("Shop\Basket");
+                            $request->add($data['id'], $pNL->id);
+
+                        }
+
+
+                        unset($_COOKIE['productsNOTLOGGED']);
+                        setcookie("productsNOTLOGGED", "[]", time() + 24*3600*7, '/');
+
+                    }
+
                     $products_brut = Model::getModel("Shop\Basket")->getBasketOf($data['id']);
-                    $products = Model::getModel("Shop\Product")->check($products_brut);
+                    $products = Model::getModel("Shop\Product")->check($products_brut, true);
+
+
                     $size = sizeof($products);
                     $array_cookie = [];
                     foreach ($products as $product) {
@@ -82,6 +102,10 @@ class Login {
                         unset($_COOKIE['products']);
                         setcookie("products", "[]", time() + 24*3600*7, '/');
                     }
+
+
+
+
 
 
                     return [true, "<strong>Connexion réussie ! </strong> Veuillez patienter, vous allez être redirigé.<br />"];
