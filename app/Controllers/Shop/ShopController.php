@@ -4,6 +4,7 @@ namespace App\Controllers\Shop;
 
 use App\Controllers\Account\Pagination;
 use App\Controllers\Account\Tri;
+use App\Controllers\Utils\Notification;
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
 use App\Router;
@@ -12,6 +13,7 @@ class ShopController extends Controller {
 
 
     public function home() {
+
         if(Model::getModel("Session\Session")->get("admin") == 1) {
             header("Location: ". Router::getRouter()->getLink("admin") ."");
             return;
@@ -20,13 +22,17 @@ class ShopController extends Controller {
 
         $categories = Model::getModel("Shop\Category")->getAll();
         $products = Model::getModel("Shop\Product")->getAll();
-        $this->render("home",compact("products", "categories", "links"));
+        $notif = "";
+        if(Notification::is("shop")) {
+            $notif = Notification::render("shop");
+        }
+        $this->render("home",compact("products", "categories", "links", "notif"));
     }
 
 
 
     public function getByCategory() {
-
+        $notif = "";
         if(Model::getModel("Session\Session")->get("admin") == 1) {
             header("Location: ". Router::getRouter()->getLink("admin") ."");
             return;
@@ -54,7 +60,6 @@ class ShopController extends Controller {
             }
 
 
-
             $pagination = new Pagination($products_brut);
 
             $products = $pagination->getPage();
@@ -63,9 +68,16 @@ class ShopController extends Controller {
 
 
             if(count($products) == 0) {
+                Notification::set("shop", "Aucun produit disponible dans cette catégorie !", "warning");
                 header('Location: ' . Router::getRouter()->getLink("home"));
+                return;
             }
-            $this->render("home",compact("products", "categories", "links", "buttons"));
+
+            if(Notification::is("shop")) {
+                $notif = Notification::render("shop");
+            }
+
+            $this->render("home",compact("products", "categories", "links", "buttons", "notif"));
 
         } else {
             $this->home();
@@ -101,6 +113,7 @@ class ShopController extends Controller {
             $maxPrice = trim($param['maxPrice']);
             $products_brut = [];
             if($maxPrice == 'all' AND $minPrice == 'all') {
+
                 header('Location: ' . Router::getRouter()->getLink("home"));
             } else if($maxPrice == 'all') {
                 $minPrice = intval($minPrice);
@@ -126,9 +139,17 @@ class ShopController extends Controller {
 
 
             if(count($products) == 0) {
+                Notification::set("shop", "Aucun produit disponible dans cette catégorie !", "warning");
                 header('Location: ' . Router::getRouter()->getLink("home"));
+                return;
             }
-            $this->render("home",compact("products", "categories", "links", "buttons"));
+
+            $notif = "";
+            if(Notification::is("shop")) {
+                $notif = Notification::render("shop");
+            }
+
+            $this->render("home",compact("products", "categories", "links", "buttons", "notif"));
 
         }
 

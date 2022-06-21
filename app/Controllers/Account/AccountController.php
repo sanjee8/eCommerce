@@ -5,6 +5,7 @@ namespace App\Controllers\Account;
 
 
 use App\Controllers\Utils\Alert;
+use App\Controllers\Utils\Notification;
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
 use App\Router;
@@ -56,6 +57,7 @@ class AccountController extends Controller {
         $response = null;
 
 
+
         if($resp != null) {
             if($resp[0]) {
                 $success = new Alert($resp[1], "success");
@@ -85,8 +87,13 @@ class AccountController extends Controller {
             }
         }
 
+        $notif = "";
+        if(Notification::is("login")) {
+            $notif = Notification::render("login");
+        }
 
-        $this->render($view, compact('response'));
+
+        $this->render($view, compact('response', "notif"));
 
     }
 

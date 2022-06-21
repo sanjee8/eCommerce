@@ -74,6 +74,9 @@
         </div>
 
         <div class="col-9">
+
+            <?php echo $notif; ?>
+
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
                 <?php foreach ($products as $product ) { ?>
                 <div class="col">

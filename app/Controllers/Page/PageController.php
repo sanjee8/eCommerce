@@ -6,6 +6,7 @@ namespace App\Controllers\Page;
 
 use App\Controllers\Account\Pagination;
 use App\Controllers\Account\Tri;
+use App\Controllers\Utils\Notification;
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
 use App\Router;
@@ -35,9 +36,14 @@ class PageController extends Controller {
 
         $buttons = $pagination->getButtons();
 
+        $notif = "";
+        if(Notification::is("shop")) {
+            $notif = Notification::render("shop");
+        }
 
 
-        $this->render("home",compact("products", "categories", "links", "buttons"));
+
+        $this->render("home",compact("products", "categories", "links", "buttons", "notif"));
     }
 
 }

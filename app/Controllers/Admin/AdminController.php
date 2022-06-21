@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Utils\Alert;
+use App\Controllers\Utils\Notification;
 use App\Core\Controller\Controller;
 use App\Core\Model\Model;
 use App\Router;
@@ -16,6 +17,7 @@ class AdminController extends Controller {
 
         $session = Model::getModel("Session\Session");
         if(!$session->isLogged() || $session->get("admin") == 0) {
+            Notification::set("login", "Vous devez être connecté pour accéder à cette page !", "danger");
             header("Location: ". Router::getRouter()->getLink("signin") ."");
             return;
         }

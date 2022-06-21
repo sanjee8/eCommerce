@@ -1,6 +1,6 @@
 <main class="form-signin w-100 m-auto text-center">
 
-    <?php echo $response;?>
+    <?php echo $response; echo $notif;?>
 
     <form action="" method="post" name="signin">
         <h1 class="h3 mb-3 fw-normal">Se connecter</h1>
