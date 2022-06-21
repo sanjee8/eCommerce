@@ -18,7 +18,8 @@ $rooter = Router::getRouter();
 try {
     $rooter->init();
 } catch (Exception $e) {
-
+    echo "Erreur lors du chargement de la page, veuillez contacter un administrateur. <br />";
+    echo $e;
 }
 
 
