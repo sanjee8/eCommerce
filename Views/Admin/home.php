@@ -26,7 +26,7 @@
                 <td><?= $orderLatest->id ?></td>
                 <td><?= $orderLatest->email ?></td>
                 <td><?= $orderLatest->final_price ?>€</td>
-                <td><?= date('m/d/Y H:i:s', $orderLatest->date_of) ?></td>
+                <td><?= date('d/m/Y H:i:s', $orderLatest->date_of) ?></td>
             </tr>
             <?php } ?>
             </tbody>
